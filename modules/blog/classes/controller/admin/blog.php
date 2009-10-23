@@ -7,7 +7,7 @@
  * See license.txt for full text and disclaimer
  */
 
-class Controller_Admin_Blog extends Controller_Admin {
+class Controller_Admin_Blog extends S7N_Controller_Admin {
 
 	public function action_index()
 	{

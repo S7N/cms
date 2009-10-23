@@ -7,18 +7,16 @@
  * See license.txt for full text and disclaimer
  */
 
-class Controller_Blog extends S7N_Controller_Template {
+abstract class S7N_Controller_Admin extends Kohana_Controller_Template {
 
-	public function before()
-	{
+	public function before() {
+
+		// load admin theme
+		Kohana::modules(array_merge(Kohana::modules(), array (
+			'themes' => THEMESPATH.'admin'
+		)));
+
 		parent::before();
-
-		// TODO change action here
-	}
-
-	public function action_index($arg)
-	{
-		$this->template->content = 'this is my blog';
 	}
 
 }

@@ -22,17 +22,8 @@ Route::set('createnodes', 'createnodes')
 		'action' => 'index'
 ));
 
-// default route
-Route::set('default', '(<permalink>)', array('permalink' => '.+'))
-	->defaults(array(
-		'controller' => 'page',
-		'action' => 'index',
-		'permalink' => '',
-));
-
 // load core modules
 Kohana::modules(array_merge(Kohana::modules(), array (
-	'themes'     => THEMESPATH.'default',
 	'database'   => COREPATH.'modules/database',
 	'sprig'      => COREPATH.'modules/sprig',
 	'sprig-mptt' => COREPATH.'modules/sprig-mptt',
@@ -60,3 +51,11 @@ if (count($modules) > 0)
 {
 	Kohana::modules(array_merge(Kohana::modules(), $modules));
 }
+
+// default route
+Route::set('default', '(<permalink>)', array('permalink' => '.+'))
+	->defaults(array(
+		'controller' => 'page',
+		'action' => 'index',
+		'permalink' => '',
+));

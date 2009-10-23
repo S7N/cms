@@ -7,11 +7,11 @@
  * See license.txt for full text and disclaimer
  */
 
-class Controller_Admin_Dashboard extends Controller_Admin {
+class Controller_Admin_Dashboard extends S7N_Controller_Admin {
 
 	public function action_index()
 	{
-		$this->template->content = 'Hello Admin';
+		$this->template->content = 'Dashboard';
 	}
 
 }

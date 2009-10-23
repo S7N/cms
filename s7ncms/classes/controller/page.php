@@ -7,9 +7,7 @@
  * See license.txt for full text and disclaimer
  */
 
-class Controller_Page extends Controller_Template {
-
-	public $template = 'templates/default';
+class Controller_Page extends S7N_Controller_Template {
 
 	public function action_index($permalink)
 	{
@@ -41,7 +39,7 @@ class Controller_Page extends Controller_Template {
 		}
 		else
 		{
-			exit('not found:' .$permalink);
+			exit('page not found: ' .$permalink);
 		}
 	}
 
