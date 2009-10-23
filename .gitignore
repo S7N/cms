@@ -1,0 +1,6 @@
+Icon?
+.DS_Store
+.svn
+config/database.php
+config/cache/*
+config/log/*
