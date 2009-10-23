@@ -1,0 +1,12 @@
+[submodule "system"]
+	path = system
+	url = git://github.com/kohana/core.git
+[submodule "s7ncms/modules/database"]
+	path = s7ncms/modules/database
+	url = git://github.com/kohana/database.git
+[submodule "s7ncms/modules/sprig-mptt"]
+	path = s7ncms/modules/sprig-mptt
+	url = git://github.com/banks/sprig-mptt.git
+[submodule "s7ncms/modules/sprig"]
+	path = s7ncms/modules/sprig
+	url = git://github.com/shadowhand/sprig.git
