@@ -10,3 +10,6 @@
 [submodule "s7ncms/modules/sprig"]
 	path = s7ncms/modules/sprig
 	url = git://github.com/shadowhand/sprig.git
+[submodule "s7ncms/modules/acl"]
+	path = s7ncms/modules/acl
+	url = git://github.com/Wouterrr/ACL.git
