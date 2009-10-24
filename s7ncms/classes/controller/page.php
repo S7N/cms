@@ -29,8 +29,8 @@ class Controller_Page extends S7N_Controller_Template {
 					}
 					else
 					{
-						$this->title = $page->content->title;
-						$this->content = View::factory('page/content', array('data' => $page->content->data));
+						//$this->title = 'Static Page';
+						$this->content = View::factory('page/content', array('title' => $page->content->title, 'data' => $page->content->data));
 					}
 					break;
 

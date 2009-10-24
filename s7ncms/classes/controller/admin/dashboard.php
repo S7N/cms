@@ -12,7 +12,7 @@ class Controller_Admin_Dashboard extends S7N_Controller_Admin {
 	public function action_index()
 	{
 		$this->title = 'Dashboard';
-		$this->content = 'Hello';
+		$this->content = '1. create pages; 2. create routes; 3. create menu';
 	}
 
 }

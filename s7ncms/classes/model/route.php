@@ -10,6 +10,7 @@
 class Model_Route extends Sprig_MPTT {
 
 	protected $_table = 'routes';
+	protected $_sorting = array('lft' => 'ASC');
 	public $arguments = array();
 
 	protected function _init()
