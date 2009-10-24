@@ -18,7 +18,8 @@ class Controller_Blog extends S7N_Controller_Template {
 
 	public function action_index($arg)
 	{
-		$this->template->content = 'this is my blog';
+		$this->title = 'Blog';
+		$this->content = 'this is my blog';
 	}
 
 }

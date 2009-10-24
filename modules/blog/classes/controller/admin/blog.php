@@ -11,6 +11,7 @@ class Controller_Admin_Blog extends S7N_Controller_Admin {
 
 	public function action_index()
 	{
-		$this->template->content = 'Hello Bog Admin!';
+		$this->title = 'Blog';
+		$this->content = 'Hello';
 	}
 }

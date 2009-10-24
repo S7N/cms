@@ -19,7 +19,7 @@ class Controller_Page extends S7N_Controller_Template {
 			switch ($page->type)
 			{
 				case 'module':
-					$this->template->content =  Request::factory($page->content->data .'/'. implode('/', $route->arguments))->execute()->response;
+					$this->content =  Request::factory($page->content->data .'/'. implode('/', $route->arguments))->execute()->response;
 					break;
 
 				case 'static':
@@ -29,7 +29,8 @@ class Controller_Page extends S7N_Controller_Template {
 					}
 					else
 					{
-						$this->template->content = View::factory('page/content', array('title' => $page->content->title, 'data' => $page->content->data));
+						$this->title = $page->content->title;
+						$this->content = View::factory('page/content', array('data' => $page->content->data));
 					}
 					break;
 

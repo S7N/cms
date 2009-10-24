@@ -11,7 +11,8 @@ class Controller_Admin_Dashboard extends S7N_Controller_Admin {
 
 	public function action_index()
 	{
-		$this->template->content = 'Dashboard';
+		$this->title = 'Dashboard';
+		$this->content = 'Hello';
 	}
 
 }
