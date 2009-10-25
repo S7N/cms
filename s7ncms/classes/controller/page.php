@@ -25,7 +25,7 @@ class Controller_Page extends S7N_Controller_Template {
 				case 'static':
 					if (count($route->arguments) > 0)
 					{
-						exit('too many arguments'); // TODO 404
+						throw new S7N_Exception_404;
 					}
 					else
 					{
@@ -35,12 +35,12 @@ class Controller_Page extends S7N_Controller_Template {
 					break;
 
 				default:
-					exit('invalid page type:' . $page->type);
+					throw new S7N_Exception_404;
 			}
 		}
 		else
 		{
-			exit('page not found: ' .$permalink);
+			throw new S7N_Exception_404;
 		}
 	}
 

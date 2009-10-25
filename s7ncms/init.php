@@ -15,6 +15,12 @@ Route::set('admin', 'admin(/<controller>(/<action>(/<id>)))', array('id' => '.+'
 		'directory' => 'admin'
 ));
 
+// error route
+Route::set('error', 'error/<action>', array('action' => '403|404|500'))
+	->defaults(array(
+		'controller' => 'error'
+));
+
 // XXX internal route for creating nodes to test mptt :-)
 Route::set('createnodes', 'createnodes')
 	->defaults(array(

@@ -18,6 +18,11 @@ date_default_timezone_set('Europe/Berlin');
  */
 spl_autoload_register(array('Kohana', 'auto_load'));
 
+/**
+* Set the production status by the domain.
+*/
+define('IN_PRODUCTION', FALSE);
+
 //-- Configuration and initialization -----------------------------------------
 
 /**
@@ -50,7 +55,6 @@ Kohana::$log->attach(new Kohana_Log_File(CONFIGPATH.'logs'));
  */
 Kohana::$config->attach(new Kohana_Config_File);
 
-
 /**
  * Enable modules. Modules are referenced by a relative or absolute path.
  */
@@ -60,7 +64,35 @@ Kohana::modules(array('s7ncms' => COREPATH));
  * Execute the main request. A source of the URI can be passed, eg: $_SERVER['PATH_INFO'].
  * If no source is specified, the URI will be automatically detected.
  */
-echo Request::instance()
-	->execute()
-	->send_headers()
-	->response;
+$request = Request::instance();
+
+try {
+	$request->execute();
+}
+catch (S7N_Exception_403 $e)
+{
+	$request = Request::factory('error/403')->execute();
+	$request->status = 403;
+}
+catch (S7N_Exception_404 $e)
+{
+	$request = Request::factory('error/404')->execute();
+	$request->status = 404;
+}
+catch (ReflectionException $e)
+{
+	$request = Request::factory('error/404')->execute();
+	$request->status = 404;
+}
+catch (Exception $e)
+{
+	if ( ! IN_PRODUCTION)
+	{
+		throw $e;
+	}
+
+	$request = Request::factory('error/404')->execute();
+	$request->status = 404;
+}
+
+echo $request->send_headers()->response;
