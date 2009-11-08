@@ -9,48 +9,8 @@
 
 class Controller_Admin_Page extends S7N_Controller_Admin {
 
-	public function before()
-	{
-		parent::before();
-
-		$this->title = 'Page';
-	}
-
-	public function action_index()
-	{
-		$this->title .= ' - List All';
-		$this->content = View::factory('page/index')->bind('pages', $pages);
-
-		$pages = Sprig::factory('page')->load(NULL, FALSE);
-	}
-
-	public function action_create()
-	{
-		$this->title .= ' - Create';
-		$this->content = View::factory('page/create')->bind('page', $content);
-
-		$content = Sprig::factory('content');
-
-		if ($_POST)
-		{
-			if ($post = $content->check($_POST))
-			{
-				$content->values($post);
-				$content->create();
-
-				$page = Sprig::factory('page');
-				$page->content = $content;
-				$page->type = 'static';
-				$page->create();
-
-				Request::instance()->redirect('admin/page/update/'. $page->id);
-			}
-		}
-	}
-
 	public function action_update($id)
 	{
-		$this->title .= ' - Update';
 		$this->content = View::factory('page/update')
 			->bind('page', $page)
 			->bind('errors', $errors);
@@ -64,16 +24,15 @@ class Controller_Admin_Page extends S7N_Controller_Admin {
 				$page->content->values($post);
 				$page->content->update();
 
-				Request::instance()->redirect('admin/page/update/'. $id);
+				Session::instance()->set('notice', __('Pages was updated successfully'));
+
+				Request::instance()->redirect('admin/site');
+			}
+			else
+			{
+				Session::instance()->set('error', __('Error occured'));
 			}
 		}
-	}
-
-	public function action_delete($id)
-	{
-		Sprig::factory('page', array('id' => $id))->load()->delete();
-
-		Request::instance()->redirect('admin/page');
 	}
 
 }

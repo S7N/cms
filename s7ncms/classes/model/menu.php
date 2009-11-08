@@ -27,4 +27,61 @@ class Model_Menu extends Sprig_MPTT {
 		);
 	}
 
+	public function json()
+	{
+		$items = $this->load(NULL, FALSE);
+		$stack = array(array());
+		$last_node_level = 0;
+		$last_node = NULL;
+
+		foreach ($items as $item)
+		{
+			$has_children = ($item->lft+1 < $item->rgt);
+
+			if ($last_node_level == $item->lvl) {
+				array_push($stack[count($stack)-1], array(
+					'data' => $item->title,
+					'children' => array(),
+					'attributes' => array('id' => 'item_'.$item->id, 'rel' => 'menu'),
+					'state' => $has_children ? 'open' : ''
+				));
+
+                $last_node = & $stack[count($stack)-1][count($stack[count($stack)-1])-1]['children'];
+                $last_node_level = $item->lvl;
+			}
+			elseif ($last_node_level < $item->lvl)
+			{
+				$stack[] = & $last_node;
+
+				array_push($stack[count($stack)-1], array(
+					'data' => $item->title,
+					'children' => array(),
+					'attributes' => array('id' => 'item_'.$item->id, 'rel' => 'menu'),
+					'state' => $has_children ? 'open' : ''
+				));
+
+				$last_node = & $stack[count($stack)-1][count($stack[count($stack)-1])-1]['children'];
+				$last_node_level = $item->lvl;
+			}
+			elseif ($last_node_level > $item->lvl)
+			{
+				for ($i=0; $i < ($last_node_level-$item->lvl); $i++) {
+					array_pop($stack);
+				}
+
+				array_push($stack[count($stack)-1], array(
+					'data' => $item->title,
+					'children' => array(),
+					'attributes' => array('id' => 'item_'.$item->id, 'rel' => 'menu'),
+					'state' => $has_children ? 'open' : ''
+				));
+
+				$last_node = & $stack[count($stack)-1][count($stack[count($stack)-1])-1]['children'];
+				$last_node_level = $item->lvl;
+			}
+		}
+
+		return json_encode($stack[0]);
+	}
+
 }

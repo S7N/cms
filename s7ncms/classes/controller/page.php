@@ -12,25 +12,27 @@ class Controller_Page extends S7N_Controller_Template {
 	public function action_index($permalink)
 	{
 		$route = Sprig::factory('route')->permalink($permalink);
-		$page = $route->page; // TODO Sprig should always return a Model_Page object here!
 
-		if ($page instanceof Model_Page AND $page->loaded())
+		if ($route->loaded())
 		{
-			switch ($page->type)
+			switch ($route->type)
 			{
+				case 'redirect':
+					Request::instance()->redirect($route->target);
+					break;
+
 				case 'module':
-					$this->content =  Request::factory($page->content->data .'/'. implode('/', $route->arguments))->execute()->response;
+					$this->content = Request::factory('module_'.$route->target .'/'. implode('/', $route->arguments))->execute()->response;
 					break;
 
 				case 'static':
-					if (count($route->arguments) > 0)
+					if (count($route->arguments) > 0 OR ! $route->page instanceof Model_Page)
 					{
 						throw new S7N_Exception_404;
 					}
 					else
 					{
-						//$this->title = 'Static Page';
-						$this->content = View::factory('page/content', array('title' => $page->content->title, 'data' => $page->content->data));
+						$this->content = View::factory('page/content', array('title' => $route->page->content->title, 'data' => $route->page->content->data));
 					}
 					break;
 

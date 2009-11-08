@@ -1,20 +1,16 @@
-<?php echo Form::open() ?>
+<?php defined('SYSPATH') or die('No direct script access.');
 
-<?php
-$select = array('' => 'Select A Route Node');
+$select = array('' => 'Select A Route Node...');
 foreach ($routes as $route)
 {
-	$select[$route->id] = '/'.$route->uri.' (Page: '.$route->page->content->title.')';
+	$select[$route->id] = str_repeat('---', $route->lvl).' '.$route->title();
 }
 ?>
 
-<dl>
-	<dt><label for="route">Route</label></dt>
-	<dd><label for="route"><?php echo Form::select('route', $select) ?></label></dd>
+<form>
+<?php echo Form::label('route', 'Route:') ?>
+<?php echo Form::select('route', $select, NULL, array('id' => 'route')) ?><br />
 
-	<dt><label for="title">Title</label></dt>
-	<dd><label for="title"><?php echo Form::input('title') ?></label></dd>
-</dl>
-
-<?php echo Form::submit('submit', 'Submit') ?>
-<?php echo Form::close() ?>
+<?php echo Form::label('title', 'Title:') ?>
+<?php echo Form::input('title', NULL, array('id' => 'title')) ?><br />
+</form>

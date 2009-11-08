@@ -7,7 +7,7 @@
  * See license.txt for full text and disclaimer
  */
 
-Route::set('blog', 'blog(/<args>)', array('args' => '.+'))
+Route::set('module_blog', 'module_blog(/<args>)', array('args' => '.+'))
 	->defaults(array(
 		'controller' => 'blog',
 		'action' => 'index',

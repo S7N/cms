@@ -9,13 +9,15 @@
 
 class S7N_Controller_Template extends Controller {
 
-	public $title;
-	public $content;
-
 	/**
 	 * @var  string  page template
 	 */
 	public $template = 'template';
+
+	/**
+	 * @var  string  page content
+	 */
+	public $content;
 
 	/**
 	 * @var  boolean  auto render template
@@ -29,18 +31,21 @@ class S7N_Controller_Template extends Controller {
 	 */
 	public function before()
 	{
-		// load admin theme
 		// TODO load theme from database
+		Theme::$name = 'default';
 		Kohana::modules(array_merge(Kohana::modules(), array (
-			'themes' => THEMESPATH.'default'
+			'themes' => THEMESPATH.Theme::$name
 		)));
+
+		if (Request::$is_ajax OR $this->request !== Request::instance())
+		{
+			$this->auto_render = FALSE;
+		}
 
 		if ($this->auto_render === TRUE)
 		{
 			// Load the template
-			// Load the template
 			$this->template = View::factory($this->template)
-				->bind('title', $this->title)
 				->bind('content', $this->content);
 		}
 	}
@@ -57,6 +62,10 @@ class S7N_Controller_Template extends Controller {
 		{
 			// Assign the template as the request response and render it
 			$this->request->response = $this->template;
+		}
+		else
+		{
+			$this->request->response = $this->content;
 		}
 	}
 

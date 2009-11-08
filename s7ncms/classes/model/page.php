@@ -15,9 +15,8 @@ class Model_Page extends Sprig {
 	{
 		$this->_fields += array(
 			'id' => new Sprig_Field_Auto,
-			'type' => new Sprig_Field_Char,
 			'content' => new Sprig_Field_HasOne(array(
-				'model' => 'Content'
+				'model' => 'content'
 			)),
 		);
 	}

@@ -9,13 +9,15 @@
 
 class S7N_Controller_Admin extends Controller {
 
-	public $title;
-	public $content;
-
 	/**
 	 * @var  string  page template
 	 */
 	public $template = 'template';
+
+	/**
+	 * @var  string  page content
+	 */
+	public $content;
 
 	/**
 	 * @var  boolean  auto render template
@@ -30,18 +32,34 @@ class S7N_Controller_Admin extends Controller {
 	public function before()
 	{
 		// load admin theme
+		Theme::$name = 'admin';
 		Kohana::modules(array_merge(Kohana::modules(), array (
-			'themes' => THEMESPATH.'admin'
+			'themes' => THEMESPATH.Theme::$name
 		)));
+
+		if (Request::$is_ajax OR $this->request !== Request::instance())
+		{
+			$this->auto_render = FALSE;
+		}
 
 		if ($this->auto_render === TRUE)
 		{
 			// Load the template
 			// Load the template
 			$this->template = View::factory($this->template)
-				->bind('title', $this->title)
 				->bind('content', $this->content);
 		}
+
+		// Add jQuery scripts
+		Assets::add_script(Theme::uri('scripts/jquery.js'), 100);
+		Assets::add_script(Theme::uri('scripts/jquery-ui.js'), 100);
+
+		// Add Stylsheets
+		Assets::add_stylesheet(Theme::uri('stylesheets/base.css'), 100);
+		Assets::add_stylesheet(Theme::uri('stylesheets/style.css'), 100);
+		Assets::add_stylesheet(Theme::uri('stylesheets/admin.css'), 100);
+		Assets::add_stylesheet(Theme::uri('stylesheets/jquery-ui.css'), 100);
+
 	}
 
 	/**
@@ -56,6 +74,10 @@ class S7N_Controller_Admin extends Controller {
 		{
 			// Assign the template as the request response and render it
 			$this->request->response = $this->template;
+		}
+		else
+		{
+			$this->request->response = $this->content;
 		}
 	}
 

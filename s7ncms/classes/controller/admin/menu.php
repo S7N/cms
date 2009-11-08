@@ -13,68 +13,115 @@ class Controller_Admin_Menu extends S7N_Controller_Admin {
 	{
 		parent::before();
 
-		$this->title = 'Menu';
+
+		Assets::add_script(Theme::uri('scripts/jquery.tree.js'));
+		Assets::add_script(Theme::uri('scripts/jquery.tree.contextmenu.js'));
+		Assets::add_script(Theme::uri('scripts/menu.js'));
 	}
 
 	public function action_index()
 	{
-		$this->title .= ' - List All';
-		$this->content = View::factory('menu/index')->bind('menuitems', $menuitems);
-
-		$menuitems = Sprig::factory('menu')->load(NULL, FALSE);
+		if (Request::$is_ajax)
+		{
+			$this->content = Sprig::factory('menu')->json();
+		}
+		else
+		{
+			$this->content = View::factory('menu/index');
+		}
 	}
 
 	public function action_create()
 	{
-		$this->title .= ' - Create';
-		$this->content = View::factory('menu/create')
-			->bind('routes', $routes)
-			->bind('menuitem', $menuitem);
-
-		$routes = Sprig::factory('route')->load(NULL, FALSE);
-		$menuitem = Sprig::factory('menu');
-
-		if ($_POST)
+		if (Request::$is_ajax)
 		{
-			if ($post = $menuitem->check($_POST))
+			if ($_POST)
 			{
-				$root = Sprig::factory('menu')->root(1);
+				$menuitem = Sprig::factory('menu');
 
-				if ($root->loaded())
+				try
 				{
-					$menuitem->values($post);
-					$menuitem->insert_as_last_child($root);
-				}
-				else
-				{
-					$menuitem->values($post);
-					$menuitem->insert_as_new_root(1);
-				}
+					if ($post = $menuitem->check($_POST))
+					{
+						$root = Sprig::factory('menu')->root(1);
 
-				Request::instance()->redirect('admin/menu/update/'. $menuitem->id);
+						if ($root->loaded())
+						{
+							$menuitem->values($post);
+							$menuitem->insert_as_last_child($root);
+						}
+						else
+						{
+							$menuitem->values($post);
+							$menuitem->insert_as_new_root(1);
+						}
+
+						$this->content = json_encode(array(
+							'id' => 'item_'.$menuitem->id,
+							'parent' => 'item_'.$root->id,
+							'title' => $menuitem->title
+						));
+					}
+				}
+				catch (Exception $e)
+				{
+					// TODO
+					$this->content = Kohana::debug($e->array->errors());
+				}
+			}
+			else
+			{
+				$this->content = new View('menu/create', array('routes' => Sprig::factory('route')->load(NULL, FALSE)));
 			}
 		}
 	}
 
-	public function action_update($id)
+	public function action_update($id = NULL)
 	{
-		$this->title .= ' - Update';
-		$this->content = View::factory('menu/update')
-			->bind('routes', $routes)
-			->bind('menuitem', $menuitem)
-			->bind('errors', $errors);
-
-		$routes = Sprig::factory('route')->load(NULL, FALSE);
-		$menuitem = Sprig::factory('menu', array('id' => $id))->load();
-
-		if ($_POST)
+		// update MPTT
+		if ($id === NULL)
 		{
-			if ($post = $menuitem->check($_POST))
-			{
-				$menuitem->values($post);
-				$menuitem->update();
+			$tree = json_decode($_POST['tree'], TRUE);
 
-				Request::instance()->redirect('admin/menu/update/'. $id);
+			$mptt = $this->calculate_mptt($tree);
+
+			foreach($mptt as $node)
+			{
+				$item = Sprig::factory('menu', array('id' => $node['id']))->load();
+				$item->lft = $node['lft'];
+				$item->rgt = $node['rgt'];
+				$item->lvl = $node['lvl'];
+				$item->update();
+			}
+
+			$this->content = 'done';
+		}
+		// update menu item
+		else
+		{
+			$menuitem = Sprig::factory('menu', array('id' => $id))->load();
+
+			if ($_POST)
+			{
+				try
+				{
+					if ($post = $menuitem->check($_POST))
+					{
+						$menuitem->values($post);
+						$menuitem->update();
+
+						$this->content = 'done';
+					}
+				}
+				catch (Exception $e)
+				{
+					$view = Kohana::debug($e->array->errors());
+				}
+			}
+			else
+			{
+				$routes = Sprig::factory('route')->load(NULL, FALSE);
+				$this->content = new View('menu/update', array('routes' => $routes, 'menuitem' => $menuitem));
 			}
 		}
 	}
@@ -83,7 +130,34 @@ class Controller_Admin_Menu extends S7N_Controller_Admin {
 	{
 		Sprig::factory('menu', array('id' => $id))->load()->delete();
 
-		Request::instance()->redirect('admin/menu');
+		$this->content = 'deleted';
+	}
+
+	private function calculate_mptt($tree, $level = 0)
+	{
+		static $mptt = array();
+		static $counter = 0;
+
+		foreach ($tree as $item => $children)
+		{
+			$id = empty($item) ? 0 : substr($item, 5);
+
+			$left = ++$counter;
+
+			if ( ! empty($children))
+				$this->calculate_mptt($children, $level+1);
+
+			$right = ++$counter;
+
+			$mptt[] = array(
+				'id' => $id,
+				'lvl' => $level,
+				'lft' => $left,
+				'rgt' => $right
+			);
+		}
+
+		return $mptt;
 	}
 
 }

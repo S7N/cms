@@ -8,9 +8,12 @@
  */
 
 if (file_exists(DOCROOT.'config/database.php'))
+{
 	return require_once(DOCROOT.'config/database.php');
+}
 else
 {
+	// TODO kann man hier schon url::base() benutzen?
 	header('Location: install.php');
 	exit;
 }

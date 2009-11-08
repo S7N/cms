@@ -7,13 +7,4 @@
  * See license.txt for full text and disclaimer
  */
 
-class S7N_Theme {
-
-	public static $name = 'default';
-
-	public static function uri($path = '')
-	{
-		return 'themes/' . Theme::$name . '/' . $path;
-	}
-
-}
+class Assets extends S7N_Assets {}

@@ -9,19 +9,9 @@
 
 class Controller_Error extends S7N_Controller_Template {
 
-	public function action_403()
+	public function action_index($id)
 	{
-		$this->title = 'Forbidden';
-	}
-
-	public function action_404()
-	{
-		$this->title = 'Not Found';
-	}
-
-	public function action_500()
-	{
-		$this->title = 'Internal Server Error';
+		$this->content = new View('error/'.$id);
 	}
 
 }

@@ -16,10 +16,12 @@ class Model_Content extends Sprig {
 		$this->_fields += array(
 			'id' => new Sprig_Field_Auto,
 			'title' => new Sprig_Field_Char(array(
-				'label' => __('Title')
+				'label' => __('Title'),
+				'empty' => TRUE
 			)),
 			'data' => new Sprig_Field_Text(array(
-				'label' => __('Content')
+				'label' => __('Content'),
+				'empty' => TRUE
 			)),
 		);
 	}

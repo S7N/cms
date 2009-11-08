@@ -9,17 +9,9 @@
 
 class Controller_Blog extends S7N_Controller_Template {
 
-	public function before()
-	{
-		parent::before();
-
-		// TODO change action here
-	}
-
 	public function action_index($arg)
 	{
-		$this->title = 'Blog';
-		$this->content = 'this is my blog';
+		$this->request->response = '<h2>Blog</h2>this is my blog';
 	}
 
 }

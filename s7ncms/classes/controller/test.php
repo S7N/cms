@@ -7,13 +7,11 @@
  * See license.txt for full text and disclaimer
  */
 
-class S7N_Theme {
+class Controller_Test extends S7N_Controller_Template {
 
-	public static $name = 'default';
-
-	public static function uri($path = '')
+	public function action_index()
 	{
-		return 'themes/' . Theme::$name . '/' . $path;
+
 	}
 
 }
