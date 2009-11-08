@@ -106,7 +106,7 @@ $(function () {
 		return false;
 	});
 	
-	$('#type').live('change', function(){
+	$('input[name=type]:checked').live('change', function(){
 		if ($(this).val().length > 0)
 			$('#type_form').load(site_uri('admin/site/create/'+$(this).val()));
 		else
@@ -119,7 +119,7 @@ $(function () {
 				"Create": function () {
 					var nodedata, title;
 					
-					switch ($('#type').val()) {
+					switch ($('input[name=type]:checked').val()) {
 						case 'redirect':
 							nodedata = {
 								type : 'redirect',

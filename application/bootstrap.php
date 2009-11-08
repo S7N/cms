@@ -42,7 +42,8 @@ Kohana::init(array(
 	'base_url' => dirname($_SERVER['SCRIPT_NAME']),
 	'index_file' => 'index.php',
 	'cache_dir' => CONFIGPATH.'cache',
-	'caching' => FALSE
+	'caching' => FALSE,
+	'profile' => TRUE
 ));
 
 /**
@@ -91,8 +92,12 @@ catch (Exception $e)
 		throw $e;
 	}
 
-	$request = Request::factory('error/404')->execute();
-	$request->status = 404;
+	$request = Request::factory('error/500')->execute();
+	$request->status = 500;
+
+	Kohana::$log->add(Kohana::ERROR, Kohana::exception_text($e));
 }
+
+$request->headers[] = 'HTTP/1.0 '.$request->status.' '.Request::$messages[$request->status];
 
 echo $request->send_headers()->response;

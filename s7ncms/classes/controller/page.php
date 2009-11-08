@@ -26,13 +26,13 @@ class Controller_Page extends S7N_Controller_Template {
 					break;
 
 				case 'static':
-					if (count($route->arguments) > 0 OR ! $route->page instanceof Model_Page)
+					if ( ! $route->page instanceof Model_Page)
 					{
 						throw new S7N_Exception_404;
 					}
 					else
 					{
-						$this->content = View::factory('page/content', array('title' => $route->page->content->title, 'data' => $route->page->content->data));
+						$this->show_page($route->page, $route->arguments);
 					}
 					break;
 
@@ -44,6 +44,23 @@ class Controller_Page extends S7N_Controller_Template {
 		{
 			throw new S7N_Exception_404;
 		}
+	}
+
+	private function show_page($page, $arguments)
+	{
+		if (count($arguments) > 0)
+		{
+			throw new S7N_Exception_404;
+		}
+
+		$this->content = View::factory('page/content')
+			->bind('title', $title)
+			->bind('data', $content);
+
+		$title = $page->content->title;
+		$content = $page->content->data;
+
+		$this->page_title .= ' - '.$title;
 	}
 
 }

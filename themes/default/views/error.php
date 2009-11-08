@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<title><?php echo $page_title ?></title>
+		<title>Error</title>
 		<meta name="robots" content="noindex, nofollow" />
 		<style type="text/css">
 		/*<![CDATA[*/
@@ -13,9 +13,6 @@
 		</style>
 	</head>
 	<body>
-		<?php echo new View('menu/default', array('menu' => Sprig::factory('menu')->load(NULL, FALSE))) ?>
-		<?php echo $page_content ?>
-
-		<?php if(Kohana::$profiling) echo View::factory('profiler/stats') ?>
+		<?php echo $error ?>
 	</body>
 </html>

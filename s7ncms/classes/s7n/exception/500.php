@@ -7,11 +7,11 @@
  * See license.txt for full text and disclaimer
  */
 
-class Controller_Error extends S7N_Controller_Template {
+class S7N_Exception_500 extends Kohana_Exception {
 
-	public function action_index($id)
+	public function __construct($message = '500 Internal Server Error', array $variables = NULL, $code = 0)
 	{
-		$this->content = new View('error', array('error' => new View('error/'.$id)));
+		parent::__construct($message, $variables, $code);
 	}
 
 }

@@ -17,6 +17,11 @@ class S7N_Controller_Template extends Controller {
 	/**
 	 * @var  string  page content
 	 */
+	public $title = 'S7Ncms';
+
+	/**
+	 * @var  string  page content
+	 */
 	public $content;
 
 	/**
@@ -46,7 +51,9 @@ class S7N_Controller_Template extends Controller {
 		{
 			// Load the template
 			$this->template = View::factory($this->template)
-				->bind('content', $this->content);
+				->bind('page_content', $this->content);
+
+			View::bind_global('page_title', $this->title);
 		}
 	}
 
