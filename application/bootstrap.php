@@ -43,7 +43,7 @@ Kohana::init(array(
 	'index_file' => 'index.php',
 	'cache_dir' => CONFIGPATH.'cache',
 	'caching' => FALSE,
-	'profile' => TRUE
+	'profile' => FALSE
 ));
 
 /**

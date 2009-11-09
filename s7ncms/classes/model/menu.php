@@ -20,7 +20,7 @@ class Model_Menu extends Sprig_MPTT {
 			'rgt' => new Sprig_Field_MPTT_Right,
 			'lvl' => new Sprig_Field_MPTT_Level,
 			'scope' => new Sprig_Field_MPTT_Scope,
-			'route' => new Sprig_Field_HasOne(array(
+			'route' => new Sprig_Field_BelongsTo(array(
 				'model' => 'Route'
 			)),
 			'title' => new Sprig_Field_Char

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>S7Nadmin</title>
+		<title>S7Ncms Administration</title>
 
 		<script type="text/javascript">
 			var base_uri = function(uri){return '<?php echo url::base(); ?>'+uri;}
@@ -18,7 +18,7 @@
 		<div id="container">
 			<div id="header">
 				<h1>
-					<a href="#">S7Ncms</a>
+					<a href="#">S7Ncms Administration</a>
 				</h1>
 				<div id="user-navigation">
 					<ul>
@@ -73,7 +73,7 @@
 					<?php endif ?>
 
 
-					<?php echo $content ?>
+					<?php echo $page_content ?>
 					<div id="footer">
 						<div class="block">
 							<p>

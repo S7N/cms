@@ -11,8 +11,8 @@ class Controller_Blog extends S7N_Controller_Template {
 
 	public function action_index($arg)
 	{
-		$this->page_title .= ' Weblog';
-		$this->request->response = '<h2>Blog</h2>this is my blog';
+		$this->title .= ' - Weblog';
+		$this->content = '<h2>Blog</h2>this is my blog';
 	}
 
 }

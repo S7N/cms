@@ -45,20 +45,21 @@ class S7N_Controller_Admin extends Controller {
 		if ($this->auto_render === TRUE)
 		{
 			// Load the template
-			// Load the template
-			$this->template = View::factory($this->template)
-				->bind('content', $this->content);
+			$this->template = View::factory($this->template);
 		}
 
+		View::bind_global('page_title', $this->title);
+		View::bind_global('page_content', $this->content);
+
 		// Add jQuery scripts
-		Assets::add_script(Theme::uri('scripts/jquery.js'), 100);
-		Assets::add_script(Theme::uri('scripts/jquery-ui.js'), 100);
+		Assets::add_script(Theme::uri('scripts/jquery.js'), -100);
+		Assets::add_script(Theme::uri('scripts/jquery-ui.js'), -100);
 
 		// Add Stylsheets
-		Assets::add_stylesheet(Theme::uri('stylesheets/base.css'), 100);
-		Assets::add_stylesheet(Theme::uri('stylesheets/style.css'), 100);
-		Assets::add_stylesheet(Theme::uri('stylesheets/admin.css'), 100);
-		Assets::add_stylesheet(Theme::uri('stylesheets/jquery-ui.css'), 100);
+		Assets::add_stylesheet(Theme::uri('stylesheets/base.css'), -100);
+		Assets::add_stylesheet(Theme::uri('stylesheets/style.css'), -100);
+		Assets::add_stylesheet(Theme::uri('stylesheets/admin.css'), -100);
+		Assets::add_stylesheet(Theme::uri('stylesheets/jquery-ui.css'), -100);
 
 	}
 

@@ -11,7 +11,8 @@ class Controller_Test extends S7N_Controller_Template {
 
 	public function action_index()
 	{
-
+		$route = Sprig::factory('route')->permalink('muh');
+		$this->content = Kohana::debug($route->page->load());
 	}
 
 }

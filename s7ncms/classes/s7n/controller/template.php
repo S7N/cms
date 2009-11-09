@@ -50,11 +50,11 @@ class S7N_Controller_Template extends Controller {
 		if ($this->auto_render === TRUE)
 		{
 			// Load the template
-			$this->template = View::factory($this->template)
-				->bind('page_content', $this->content);
-
-			View::bind_global('page_title', $this->title);
+			$this->template = View::factory($this->template);
 		}
+
+		View::bind_global('page_title', $this->title);
+		View::bind_global('page_content', $this->content);
 	}
 
 	/**

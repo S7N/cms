@@ -24,8 +24,8 @@ class S7N_Assets {
 
 	public static function show()
 	{
-		krsort(self::$scripts);
-		krsort(self::$stylesheets);
+		ksort(self::$scripts);
+		ksort(self::$stylesheets);
 
 		$return = NULL;
 

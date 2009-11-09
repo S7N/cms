@@ -26,14 +26,7 @@ class Controller_Page extends S7N_Controller_Template {
 					break;
 
 				case 'static':
-					if ( ! $route->page instanceof Model_Page)
-					{
-						throw new S7N_Exception_404;
-					}
-					else
-					{
-						$this->show_page($route->page, $route->arguments);
-					}
+					$this->show_page($route->page, $route->arguments);
 					break;
 
 				default:
@@ -46,7 +39,7 @@ class Controller_Page extends S7N_Controller_Template {
 		}
 	}
 
-	private function show_page($page, $arguments)
+	private function show_page($page, array $arguments)
 	{
 		if (count($arguments) > 0)
 		{
@@ -60,7 +53,7 @@ class Controller_Page extends S7N_Controller_Template {
 		$title = $page->content->title;
 		$content = $page->content->data;
 
-		$this->page_title .= ' - '.$title;
+		$this->title .= ' - '.$title;
 	}
 
 }

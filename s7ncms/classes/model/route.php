@@ -21,7 +21,7 @@ class Model_Route extends Sprig_MPTT {
 			'rgt' => new Sprig_Field_MPTT_Right,
 			'lvl' => new Sprig_Field_MPTT_Level,
 			'scope' => new Sprig_Field_MPTT_Scope,
-			'page' => new Sprig_Field_HasOne(array(
+			'page' => new Sprig_Field_BelongsTo(array(
 				'model' => 'Page',
 				'empty'  => TRUE
 			)),
