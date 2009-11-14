@@ -177,4 +177,14 @@ class Model_Route extends Sprig_MPTT {
 		return json_encode($stack[0]);
 	}
 
+	public function delete(Database_Query_Builder_Delete $query = NULL)
+	{
+		foreach ($this->descendants(TRUE) as $descendant)
+		{
+			$descendant->page->delete();
+		}
+
+		parent::delete($query);
+	}
+
 }

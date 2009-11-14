@@ -18,6 +18,8 @@ class S7N_Controller_Admin extends Controller {
 	 * @var  string  page content
 	 */
 	public $content;
+	public $sidebar_title;
+	public $sidebar_content;
 
 	/**
 	 * @var  boolean  auto render template
@@ -51,9 +53,13 @@ class S7N_Controller_Admin extends Controller {
 		View::bind_global('page_title', $this->title);
 		View::bind_global('page_content', $this->content);
 
+		View::bind_global('sidebar_title', $this->sidebar_title);
+		View::bind_global('sidebar_content', $this->sidebar_content);
+
 		// Add jQuery scripts
 		Assets::add_script(Theme::uri('scripts/jquery.js'), -100);
 		Assets::add_script(Theme::uri('scripts/jquery-ui.js'), -100);
+		Assets::add_script(Theme::uri('scripts/jquery.form.js'), -100);
 
 		// Add Stylsheets
 		Assets::add_stylesheet(Theme::uri('stylesheets/base.css'), -100);

@@ -61,7 +61,7 @@ body {
   float: right;      
 }
 
-#sidebar h3 {  
+#main h3, #sidebar h3 {  
   padding: 10px 15px;
   margin: 0;
   font-size: 13px;

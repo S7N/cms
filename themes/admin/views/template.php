@@ -47,6 +47,16 @@
 				</div>
 			</div>
 			<div id="wrapper">
+				<div id="sidebar">
+					<div class="block">
+						<h3>
+							<?php echo $sidebar_title ?>
+						</h3>
+						<div class="content">
+							<?php echo $sidebar_content ?>
+						</div>
+					</div>
+				</div>
 				<div id="main">
 					<?php if (($msg = Session::instance()->get_once('error')) !== NULL): ?>
 						<div class="flash">
@@ -72,26 +82,8 @@
 						</div>
 					<?php endif ?>
 
-
+					<div id="ajax_content">
 					<?php echo $page_content ?>
-					<div id="footer">
-						<div class="block">
-							<p>
-								Copyright &copy; 2009 Eduard Baun
-							</p>
-						</div>
-					</div>
-				</div>
-				<div id="sidebar">
-					<div class="block">
-						<h3>
-							Simple Block
-						</h3>
-						<div class="content">
-							<p>
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-							</p>
-						</div>
 					</div>
 				</div>
 				<div class="clear"></div>

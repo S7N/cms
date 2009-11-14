@@ -21,4 +21,11 @@ class Model_Page extends Sprig {
 		);
 	}
 
+	public function delete(Database_Query_Builder_Delete $query = NULL)
+	{
+		$this->content->delete();
+
+		parent::delete();
+	}
+
 }

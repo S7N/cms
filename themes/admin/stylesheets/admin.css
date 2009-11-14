@@ -1,3 +1,10 @@
+/* @override http://dev.s7n/08/themes/admin/stylesheets/admin.css */
+#main {
+	float: right;
+}
+#sidebar {
+	float: left;
+}
 #main form .error {
 	color: red;
 }
