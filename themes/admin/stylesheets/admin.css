@@ -51,45 +51,9 @@
 
 
 // tipsy
-.tipsy {
-opacity:0.8;
-filter:alpha(opacity=80);
-background-repeat:no-repeat;
-padding:5px;
-}
-
-.tipsy-inner {
-max-width:200px;
-font-weight:bold;
-font-size: 10pt;
--moz-border-radius:5px;
--khtml-border-radius:5px;
--webkit-border-radius:5px;
-border-radius:5px;
-background-color:#000;
-color:#FFFFFF;
-text-align:left;
-padding:8px;
-}
-
-.tipsy-north {
-background-image:url(../images/tipsy-north.gif);
-background-position:top center;
-}
-
-.tipsy-south {
-background-image:url(../images/tipsy-south.gif);
-background-position:bottom center;
-}
-
-.tipsy-east {
-background-image:url(../images/tipsy-east.gif);
-background-position:right center;
-}
-
-.tipsy-west {
-background-image:url(../images/tipsy-west.gif);
-background-position:left center;
-}
-
-
+.tipsy { opacity: 0.8; filter: alpha(opacity=80); }
+.tipsy-inner { font-size: 11pt; -moz-border-radius:5px; -khtml-border-radius:5px; -webkit-border-radius:5px; border-radius:5px; max-width:200px; padding: 5px; background-color: black; color: white; max-width: 200px; text-align: center; }
+.tipsy-north { background-image: url(../images/tipsy-north.gif); background-position: top center; padding: 5px; background-repeat: no-repeat;}
+.tipsy-south { background-image: url(../images/tipsy-south.gif); background-position: bottom center; padding: 5px; background-repeat: no-repeat;}
+.tipsy-east { background-image: url(../images/tipsy-east.gif); background-position: right center; padding: 5px; background-repeat: no-repeat;}
+.tipsy-west { background-image: url(../images/tipsy-west.gif); background-position: left center; padding: 5px; background-repeat: no-repeat;}

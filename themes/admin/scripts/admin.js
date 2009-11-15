@@ -1,6 +1,3 @@
 $(function(){
-	$('.tooltip').tipsy({
-		gravity: 'w',
-		fade:true
-	});
+	$('.tooltip').tipsy({gravity: 'w'});
 });
