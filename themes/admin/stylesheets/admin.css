@@ -48,3 +48,48 @@
 .tree-context a ins.create { background-position:0 -16px; }
 .tree-context a ins.rename { background-position:-16px 0px; }
 .tree-context a ins.remove { background-position:0 -32px; }
+
+
+// tipsy
+.tipsy {
+opacity:0.8;
+filter:alpha(opacity=80);
+background-repeat:no-repeat;
+padding:5px;
+}
+
+.tipsy-inner {
+max-width:200px;
+font-weight:bold;
+font-size: 10pt;
+-moz-border-radius:5px;
+-khtml-border-radius:5px;
+-webkit-border-radius:5px;
+border-radius:5px;
+background-color:#000;
+color:#FFFFFF;
+text-align:left;
+padding:8px;
+}
+
+.tipsy-north {
+background-image:url(../images/tipsy-north.gif);
+background-position:top center;
+}
+
+.tipsy-south {
+background-image:url(../images/tipsy-south.gif);
+background-position:bottom center;
+}
+
+.tipsy-east {
+background-image:url(../images/tipsy-east.gif);
+background-position:right center;
+}
+
+.tipsy-west {
+background-image:url(../images/tipsy-west.gif);
+background-position:left center;
+}
+
+

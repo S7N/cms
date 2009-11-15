@@ -60,12 +60,14 @@ class S7N_Controller_Admin extends Controller {
 		Assets::add_script(Theme::uri('scripts/jquery.js'), -100);
 		Assets::add_script(Theme::uri('scripts/jquery-ui.js'), -100);
 		Assets::add_script(Theme::uri('scripts/jquery.form.js'), -100);
+		Assets::add_script(Theme::uri('scripts/jquery.tipsy.js'), -100);
+		Assets::add_script(Theme::uri('scripts/admin.js'), -100);
 
 		// Add Stylsheets
 		Assets::add_stylesheet(Theme::uri('stylesheets/base.css'), -100);
 		Assets::add_stylesheet(Theme::uri('stylesheets/style.css'), -100);
-		Assets::add_stylesheet(Theme::uri('stylesheets/admin.css'), -100);
 		Assets::add_stylesheet(Theme::uri('stylesheets/jquery-ui.css'), -100);
+		Assets::add_stylesheet(Theme::uri('stylesheets/admin.css'), -100);
 
 	}
 
