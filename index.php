@@ -36,15 +36,19 @@ $system = 'system';
 define('EXT', '.php');
 
 /**
- * Set the PHP error reporting level. If you set this in php.ini, you remove this.
- * @see  http://php.net/error_reporting
- *
- * When developing your application, it is highly recommended to enable notices
- * and strict warnings. Enable them by using: E_ALL | E_STRICT
- *
- * In a production environment, it is safe to ignore notices and strict warnings.
- * Disable them by using: E_ALL ^ E_NOTICE
- */
+* Set the PHP error reporting level. If you set this in php.ini, you remove this.
+* @see http://php.net/error_reporting
+*
+* When developing your application, it is highly recommended to enable notices
+* and strict warnings. Enable them by using: E_ALL | E_STRICT
+*
+* In a production environment, it is safe to ignore notices and strict warnings.
+* Disable them by using: E_ALL ^ E_NOTICE
+*
+* When using a legacy application with PHP >= 5.3, it is recommended to disable
+* deprecated notices. Disable with: E_ALL & ~E_DEPRECATED
+*/
+defined('E_DEPRECATED') OR define('E_DEPRECATED', 8192);
 error_reporting(E_ALL | E_STRICT);
 ini_set('display_errors', TRUE);
 
