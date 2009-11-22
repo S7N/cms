@@ -1,6 +1,3 @@
-[submodule "system"]
-	path = system
-	url = git://github.com/kohana/core.git
 [submodule "s7ncms/modules/database"]
 	path = s7ncms/modules/database
 	url = git://github.com/kohana/database.git
@@ -13,3 +10,6 @@
 [submodule "s7ncms/modules/acl"]
 	path = s7ncms/modules/acl
 	url = git://github.com/Wouterrr/ACL.git
+[submodule "s7ncms/modules/kohana"]
+	path = s7ncms/modules/kohana
+	url = git://github.com/kohana/core.git
