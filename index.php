@@ -120,4 +120,4 @@ else
 }
 
 // Bootstrap the application
-require APPPATH.'bootstrap'.EXT;
+require COREPATH.'bootstrap'.EXT;
