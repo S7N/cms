@@ -9,15 +9,6 @@
 
 class Controller_Admin_Site extends S7N_Controller_Admin {
 
-	public function before()
-	{
-		parent::before();
-
-		Assets::add_script(Theme::uri('scripts/jquery.tree.js'));
-		Assets::add_script(Theme::uri('scripts/jquery.tree.contextmenu.js'));
-		Assets::add_script(Theme::uri('scripts/site_structure.js'));
-	}
-
 	public function action_index()
 	{
 		if (Request::$is_ajax)
