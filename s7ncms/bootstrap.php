@@ -11,6 +11,14 @@
 date_default_timezone_set('Europe/Berlin');
 
 /**
+* Set the default locale.
+*
+* @see http://docs.kohanaphp.com/about.configuration
+* @see http://php.net/setlocale
+*/
+setlocale(LC_ALL, 'de_DE.utf-8');
+
+/**
  * Enable the Kohana auto-loader.
  *
  * @see  http://docs.kohanaphp.com/features/autoloading
