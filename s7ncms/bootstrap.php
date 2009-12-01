@@ -5,7 +5,7 @@
 /**
  * Set the default time zone.
  *
- * @see  http://docs.kohanaphp.com/features/localization#time
+ * @see  http://docs.kohanaphp.com/about.configuration
  * @see  http://php.net/timezones
  */
 date_default_timezone_set('Europe/Berlin');
@@ -21,13 +21,21 @@ setlocale(LC_ALL, 'de_DE.utf-8');
 /**
  * Enable the Kohana auto-loader.
  *
- * @see  http://docs.kohanaphp.com/features/autoloading
+ * @see  http://docs.kohanaphp.com/about.autoloading
  * @see  http://php.net/spl_autoload_register
  */
 spl_autoload_register(array('Kohana', 'auto_load'));
 
 /**
-* Set the production status by the domain.
+ * Enable the Kohana auto-loader for unserialization.
+ *
+ * @see  http://php.net/spl_autoload_call
+ * @see  http://php.net/manual/var.configuration.php#unserialize-callback-func
+ */
+ini_set('unserialize_callback_func', 'spl_autoload_call');
+
+/**
+* Set the production status
 */
 define('IN_PRODUCTION', FALSE);
 
