@@ -106,6 +106,4 @@ catch (Exception $e)
 	Kohana::$log->add(Kohana::ERROR, Kohana::exception_text($e));
 }
 
-$request->headers[] = 'HTTP/1.0 '.$request->status.' '.Request::$messages[$request->status];
-
 echo $request->send_headers()->response;
