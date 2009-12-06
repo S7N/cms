@@ -1,0 +1,85 @@
+/* @override http://s7n08/themes/default/css/style.css */
+
+body {
+	background: #FFFFFF;
+	color: #111111;
+	margin: 0;
+	padding: 0 20px;
+	font: 11pt/1.7em "Lucida Grande", Lucida, Verdana, sans-serif;
+}
+
+h1 {
+	font-size: 150%;
+}
+
+h2 {
+	font-size: 140%;
+}
+
+h3 {
+	font-size: 120%;
+}
+
+h4 {
+	font-size: 100%;
+}
+
+h1, h2, h3, h4 {
+	color: #000000;
+	clear: both;
+	margin: 20px 0 0 0;
+	font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+a {
+	font-weight: bold;
+	color: #2b5298;
+	text-decoration: none;
+}
+a:hover, a.active {
+	color: #666666;
+}
+
+#header {
+	border-bottom: 1px solid #cccccc;
+	padding: 25px 0;
+	margin: 0;
+}
+
+#content {
+	width: 65%;
+	float: left;
+	margin-bottom: 30px;
+}
+
+#sidebar {
+	width: 25%;
+	float: right;
+	margin-bottom: 30px;
+}
+
+#footer {
+	border-top: 1px solid #cccccc;
+	clear: both;
+	text-align: center;
+}
+
+#header h1 {
+	font-size: 250%;
+	margin: 0;
+}
+
+#sidebar ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+#sidebar li li {
+	list-style: square inside;
+	padding: 0;
+}
+
+#sidebar li li li {
+	margin-left: 20px;
+}

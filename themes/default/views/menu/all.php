@@ -16,23 +16,23 @@ if ($menu !== NULL AND count($menu) > 0)
 			if ($level > $item->lvl)
 			{
 				echo str_repeat("</ul></li>\n",($level - $item->lvl));
-				echo '<li class="'.$active.'">'.Html::anchor($item->uri(), $item->title)."\n";
+				echo '<li class="'.$active.'">'.Html::anchor($item->uri(), $item->title, array('class' => $active))."\n";
 				echo '<ul>'."\n";
 			}
 			else
 			{
-				echo '<li class="'.$active.'">'.Html::anchor($item->uri(), $item->title)."\n";
+				echo '<li class="'.$active.'">'.Html::anchor($item->uri(), $item->title, array('class' => $active))."\n";
 				echo '<ul>'."\n";
 			}
 		}
 		elseif ($level > $item->lvl)
 		{
 			echo str_repeat("</ul></li>\n",($level - $item->lvl));
-			echo'<li class="'.$active.'">'.Html::anchor($item->uri(), $item->title).'</li>'."\n";
+			echo'<li class="'.$active.'">'.Html::anchor($item->uri(), $item->title, array('class' => $active)).'</li>'."\n";
 		}
 		else
 		{
-			echo '<li class="'.$active.'">'.Html::anchor($item->uri(), $item->title).'</li>'."\n";
+			echo '<li class="'.$active.'">'.Html::anchor($item->uri(), $item->title, array('class' => $active)).'</li>'."\n";
 		}
 
 		$level = $item->lvl;
