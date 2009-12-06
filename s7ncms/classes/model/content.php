@@ -14,7 +14,11 @@ class Model_Content extends Sprig {
 	protected function _init()
 	{
 		$this->_fields += array(
-			'id' => new Sprig_Field_Auto,
+			'id' => new Sprig_Field_Auto(array(
+				'rules'  => array(
+					'regex' => array('/.+/')
+				),
+			)),
 			'title' => new Sprig_Field_Char(array(
 				'label' => __('Title')
 			)),

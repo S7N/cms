@@ -22,21 +22,6 @@ class Controller_Admin_Page extends S7N_Controller_Admin {
 				if ($post_route = $route->check($_POST) AND
 					$post_content = $route->page->content->check($_POST))
 				{
-					$root = Sprig::factory('route')->root(1);
-
-					if ($root->loaded())
-					{
-						$route->values($post_route);
-						$route->type = 'static';
-						$route->insert_as_last_child($root);
-					}
-					else
-					{
-						$route->values($post_route);
-						$route->type = 'static';
-						$route->insert_as_new_root(1);
-					}
-
 					// create new page
 					$content = Sprig::factory('content');
 					$content->values($post_content);
@@ -46,8 +31,22 @@ class Controller_Admin_Page extends S7N_Controller_Admin {
 					$page->content = $content;
 					$page->create();
 
+
+					$root = Sprig::factory('route')->root(1);
+
+					$route->values($post_route);
+					$route->type = 'static';
 					$route->page = $page;
-					$route->update();
+
+					if ($root->loaded())
+					{
+						$route->insert_as_last_child($root);
+					}
+					else
+					{
+						$route->insert_as_new_root(1);
+					}
+
 
 					$response = json_encode(array_merge($response, array(
 						'id' => 'item_'.$route->id,
@@ -59,6 +58,7 @@ class Controller_Admin_Page extends S7N_Controller_Admin {
 			}
 			catch (Exception $e)
 			{
+				//$response = json_encode(array('errors' => $e->getMessage()));
 				$response = json_encode(array('errors' => $e->array->errors('validate')));
 			}
 		}

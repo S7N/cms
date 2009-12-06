@@ -7,9 +7,22 @@
  * See license.txt for full text and disclaimer
  */
 
-Route::set('module_blog', 'module_blog(/<args>)', array('args' => '.+'))
+Route::set('module/blog/pagination', 'module/blog/page/<page>', array('page' => '[0-9]+'))
 	->defaults(array(
 		'controller' => 'blog',
-		'action' => 'index',
-		'args' => NULL
+		'action' => 'paginate',
+	));
+
+Route::set('module/blog/tags', 'module/blog/tag/<tag>', array('tag' => '.+'))
+	->defaults(array(
+		'controller' => 'blog',
+		'action' => 'tag',
+		'tag' => NULL,
+	));
+
+Route::set('module/blog', 'module/blog(/<slug>)', array('slug' => '.+'))
+	->defaults(array(
+		'controller' => 'blog',
+		'action' => 'list',
+		'slug' => NULL,
 	));

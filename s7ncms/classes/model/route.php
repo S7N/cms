@@ -16,9 +16,21 @@ class Model_Route extends Sprig_MPTT {
 	protected function _init()
 	{
 		$this->_fields += array(
-			'id' => new Sprig_Field_Auto,
-			'lft' => new Sprig_Field_MPTT_Left,
-			'rgt' => new Sprig_Field_MPTT_Right,
+			'id' => new Sprig_Field_Auto(array(
+				'rules'  => array(
+					'regex' => array('/.+/')
+				),
+			)),
+			'lft' => new Sprig_Field_MPTT_Left(array(
+				'rules'  => array(
+					'regex' => array('/.+/')
+				),
+			)),
+			'rgt' => new Sprig_Field_MPTT_Right(array(
+				'rules'  => array(
+					'regex' => array('/.+/')
+				),
+			)),
 			'lvl' => new Sprig_Field_MPTT_Level,
 			'scope' => new Sprig_Field_MPTT_Scope,
 			'page' => new Sprig_Field_BelongsTo(array(

@@ -13,9 +13,14 @@
 		</style>
 	</head>
 	<body>
-		<?php echo new View('menu/default', array('menu' => Sprig::factory('menu')->load(NULL, FALSE))) ?>
+		<h1>Menu</h1>
+		<?php echo new View('menu/first_level', array('menu' => Sprig::factory('menu2')->first_level())) ?>
+		<h1>Content</h1>
 		<?php echo $page_content ?>
 
 		<?php if(Kohana::$profiling) echo View::factory('profiler/stats') ?>
+		<hr />
+		<h1>Submenu</h1>
+		<?php echo new View('menu/all', array('menu' => Sprig::factory('menu2')->submenu())); ?>
 	</body>
 </html>

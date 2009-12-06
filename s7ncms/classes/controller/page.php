@@ -22,7 +22,7 @@ class Controller_Page extends S7N_Controller_Template {
 					break;
 
 				case 'module':
-					$this->content = Request::factory('module_'.$route->target .'/'. implode('/', $route->arguments))->execute()->response;
+					$this->content = Request::factory('module/'.$route->target .'/'. implode('/', $route->arguments))->execute()->response;
 					break;
 
 				case 'static':

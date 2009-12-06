@@ -14,9 +14,14 @@ class Model_Page extends Sprig {
 	protected function _init()
 	{
 		$this->_fields += array(
-			'id' => new Sprig_Field_Auto,
+			'id' => new Sprig_Field_Auto(array(
+				'rules'  => array(
+					'regex' => array('/.+/')
+				),
+			)),
 			'content' => new Sprig_Field_BelongsTo(array(
-				'model' => 'Content'
+				'model' => 'Content',
+				'empty' => FALSE
 			)),
 		);
 	}

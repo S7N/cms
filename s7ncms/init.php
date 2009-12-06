@@ -22,15 +22,8 @@ Route::set('error', 'error/<id>', array('id' => '403|404|500'))
 		'action' => 'index'
 ));
 
-// XXX internal route for creating nodes to test mptt :-)
-Route::set('createnodes', 'createnodes')
-	->defaults(array(
-		'controller' => 'createnodes',
-		'action' => 'index'
-));
-
 // XXX internal testing route :-)
-Route::set('xtest', 'test')
+Route::set('xtest', 'test(/<action>(/<id>))')
 	->defaults(array(
 		'controller' => 'test',
 		'action' => 'index'
@@ -47,7 +40,7 @@ Kohana::modules(array_merge(Kohana::modules(), array (
 Kohana::$config->attach(new Kohana_Config_Database);
 
 // set the default language
-// TODO set from config/uri
+// TODO set from config/uri; create i18n module
 I18n::$lang = 'de-de';
 
 // load user modules
