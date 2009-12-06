@@ -37,6 +37,7 @@ class Controller_Admin_Page extends S7N_Controller_Admin {
 					$route->values($post_route);
 					$route->type = 'static';
 					$route->page = $page;
+					$route->uri = URL::title($content->title);
 
 					if ($root->loaded())
 					{

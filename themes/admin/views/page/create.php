@@ -12,11 +12,6 @@
 					<span class="description">Title of the Page</span>
 				</div>
 				<div class="group">
-					<?php echo $route->label('uri', array('class' => 'label')) ?> <span class="error"></span>
-					<?php echo $route->input('uri', array('class' => 'text_field')) ?>
-					<span class="description">Unique URI of this Page</span>
-				</div>
-				<div class="group">
 					<?php echo $page->content->label('data', array('class' => 'label')) ?> <span class="error"></span>
 					<?php echo $page->content->input('data', array('class' => 'text_area')) ?>
 					<span class="description">Write here a long text</span>

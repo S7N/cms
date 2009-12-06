@@ -40,7 +40,10 @@ class Model_Route extends Sprig_MPTT {
 			'type' => new Sprig_Field_Char,
 			'uri' => new Sprig_Field_Char,
 			'title' => new Sprig_Field_Char(array(
-				'empty'  => TRUE
+				'empty'  => TRUE,
+				'rules' => array(
+					'regex' => array('/./')
+				)
 			)),
 			'target' => new Sprig_Field_Text(array(
 				'empty'  => TRUE
@@ -99,13 +102,13 @@ class Model_Route extends Sprig_MPTT {
 		{
 			if ($parent->lvl > 0)
 			{
-				$uri[] = $parent->uri;
+				$uri[] = urlencode($parent->uri);
 			}
 		}
 
 		if ($this->lvl > 0)
 		{
-			$uri[] = $this->uri;
+			$uri[] = urlencode($this->uri);
 		}
 
 		return empty($uri) ? '/' : implode('/', $uri);

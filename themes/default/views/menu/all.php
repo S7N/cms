@@ -9,7 +9,7 @@ if ($menu !== NULL AND count($menu) > 0)
 
 	foreach ($menu as $item)
 	{
-		$active = ($item->uri() === Request::instance()->uri()) ? 'active' : '';
+		$active = (urldecode($item->uri()) === Request::instance()->uri()) ? 'active' : '';
 
 		if ($item->has_children())
 		{
