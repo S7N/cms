@@ -23,7 +23,7 @@
 	<div id="sidebar">
 		<ul>
 			<li><h2>Menu</h2>
-				<?php echo new View('menu/all', array('menu' => Sprig::factory('menu2')->load_all())) ?>
+				<?php echo Menu::main() ?>
 			</li>
 		</ul>
 	</div>

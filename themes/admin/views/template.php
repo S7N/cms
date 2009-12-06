@@ -39,9 +39,6 @@
 						<li>
 							<?php echo Html::anchor('admin/site', 'Site Structure')?>
 						</li>
-						<li>
-							<?php echo Html::anchor('admin/menu', 'Menu')?>
-						</li>
 					</ul>
 					<div class="clear"></div>
 				</div>
