@@ -13,7 +13,7 @@ class Controller_Admin_Site extends S7N_Controller_Admin {
 	{
 		if (Request::$is_ajax)
 		{
-			$this->content = Sprig::factory('route')->json();
+			$this->content = Sprig::factory('page')->json();
 		}
 		else
 		{
@@ -26,19 +26,19 @@ class Controller_Admin_Site extends S7N_Controller_Admin {
 
 	public function action_update($id)
 	{
-		$route = Sprig::factory('route', array('id' => $id))->load();
+		$page = Sprig::factory('page', array('id' => $id))->load();
 
-		switch ($route->type) {
+		switch ($page->content->type) {
 			case 'static':
-				$this->content = new View('page/update', array('route' => $route, 'page' => $route->page));
+				$this->content = new View('page/update', array('page' => $page));
 				break;
 
 			case 'module':
-				$this->content = new View('module/update', array('route' => $route));
+				$this->content = new View('module/update', array('page' => $page));
 				break;
 
 			case 'redirect':
-				$this->content = new View('redirect/update', array('route' => $route));
+				$this->content = new View('redirect/update', array('page' => $page));
 				break;
 		}
 	}
@@ -51,7 +51,7 @@ class Controller_Admin_Site extends S7N_Controller_Admin {
 
 		foreach($mptt as $node)
 		{
-			$route = Sprig::factory('route', array('id' => $node['id']))->load();
+			$route = Sprig::factory('page', array('id' => $node['id']))->load();
 			$route->lft = $node['lft'];
 			$route->rgt = $node['rgt'];
 			$route->lvl = $node['lvl'];

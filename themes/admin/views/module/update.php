@@ -5,15 +5,20 @@
 	</h3>
 	<div class="content">
 		<div class="inner">
-			<?php echo Form::open('admin/module/update/'.$route->id, array('class' => 'form', 'id' => 'ajaxform')) ?>
+			<?php echo Form::open('admin/module/update/'.$page->id, array('class' => 'form', 'id' => 'ajaxform')) ?>
 				<div class="group">
-					<?php echo $route->label('uri', array('class' => 'label')) ?> <span class="error"></span>
-					<?php echo $route->input('uri', array('class' => 'text_field')) ?>
+					<?php echo $page->content->label('title', array('class' => 'label')) ?> <span class="error"></span>
+					<?php echo $page->content->input('title', array('class' => 'text_field')) ?>
 					<span class="description">Unique URI of this Page</span>
 				</div>
 				<div class="group">
-					<?php echo $route->label('target', array('class' => 'label')) ?> <span class="error"></span>
-					<?php echo $route->input('target', array('class' => 'text_area')) ?>
+					<?php echo $page->content->label('slug', array('class' => 'label')) ?> <span class="error"></span>
+					<?php echo $page->content->input('slug', array('class' => 'text_field')) ?>
+					<span class="description">Unique URI</span>
+				</div>
+				<div class="group">
+					<?php echo $page->content->label('data', array('class' => 'label')) ?> <span class="error"></span>
+					<?php echo $page->content->input('data', array('class' => 'text_area')) ?>
 					<span class="description">Module name</span>
 				</div>
 				<div class="group navform">

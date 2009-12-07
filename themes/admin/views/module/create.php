@@ -7,13 +7,13 @@
 		<div class="inner">
 			<?php echo Form::open('admin/module/create/', array('class' => 'form', 'id' => 'ajaxform')) ?>
 				<div class="group">
-					<?php echo $route->label('uri', array('class' => 'label')) ?> <span class="error"></span>
-					<?php echo $route->input('uri', array('class' => 'text_field')) ?>
-					<span class="description">Unique URI of this Page</span>
+					<?php echo $page->content->label('title', array('class' => 'label')) ?> <span class="error"></span>
+					<?php echo $page->content->input('title', array('class' => 'text_field')) ?>
+					<span class="description">Title</span>
 				</div>
 				<div class="group">
-					<?php echo $route->label('target', array('class' => 'label')) ?> <span class="error"></span>
-					<?php echo $route->input('target', array('class' => 'text_area')) ?>
+					<?php echo $page->content->label('data', array('class' => 'label')) ?> <span class="error"></span>
+					<?php echo $page->content->input('data', array('class' => 'text_area')) ?>
 					<span class="description">Module name</span>
 				</div>
 				<div class="group navform">

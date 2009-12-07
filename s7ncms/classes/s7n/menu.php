@@ -18,23 +18,22 @@ class S7N_Menu {
 			$template = 'menu/all';
 		}
 
-		return new View($template, array('menu' => Sprig::factory('route')->load(NULL, FALSE)));
+		return new View($template, array('menu' => Sprig::factory('page')->load(NULL, FALSE)));
 	}
 
 	public static function submenu()
 	{
 		$menu = NULL;
 
-		$route = Sprig::factory('route')->permalink(Request::instance()->uri());
+		$route = Sprig::factory('page')->permalink(Request::instance()->uri());
 
 		$parents = $route->parents();
-		$count = count($parents);
 
 		if ($route->lvl === 1)
 		{
 			$menu = $route->descendants();
 		}
-		elseif ($count > 0)
+		elseif (count($parents) > 0)
 		{
 			foreach ($parents as $parent)
 			{
@@ -50,7 +49,7 @@ class S7N_Menu {
 
 	public static function first_level()
 	{
-		return new View('menu/first_level', array('menu' => Sprig::factory('route')->load(DB::select()->where('lvl', '=', 1), FALSE)));
+		return new View('menu/first_level', array('menu' => Sprig::factory('page')->load(DB::select()->where('lvl', '=', 1), FALSE)));
 	}
 
 }

@@ -11,37 +11,40 @@ class Controller_Page extends S7N_Controller_Template {
 
 	public function action_index($permalink)
 	{
-		$route = Sprig::factory('route')->permalink($permalink);
+		$page = Sprig::factory('page')->permalink($permalink);
 
-		if ($route->loaded())
+		if ($page->loaded())
 		{
-			switch ($route->type)
+			switch ($page->content->type)
 			{
 				case 'redirect':
-					Request::instance()->redirect($route->target);
+					Request::instance()->redirect($page->content->data);
 					break;
 
 				case 'module':
-					$this->content = Request::factory('module/'.$route->target .'/'. implode('/', $route->arguments))->execute()->response;
+					$this->content = Request::factory('module/'.$page->content->data .'/'. implode('/', $page->arguments))->execute()->response;
 					break;
 
 				case 'static':
-					$this->show_page($route->page, $route->arguments);
+					$this->show_page($page);
 					break;
 
 				default:
+					// unknown content type
 					throw new S7N_Exception_404;
 			}
 		}
 		else
 		{
+			// page not found
 			throw new S7N_Exception_404;
 		}
 	}
 
-	private function show_page($page, array $arguments)
+	private function show_page($page)
 	{
-		if (count($arguments) > 0)
+		// too many arguments
+		if (count($page->arguments) > 0)
 		{
 			throw new S7N_Exception_404;
 		}

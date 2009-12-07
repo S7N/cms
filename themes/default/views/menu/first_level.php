@@ -2,13 +2,13 @@
 
 <ul>
 <?php
-if (count($menu) > 0)
+if ($menu !== NULL AND count($menu) > 0)
 {
 	foreach ($menu as $item)
 	{
-		$active = ($item->uri() === Request::instance()->uri()) ? 'active' : '';
+		$active = (rldecode($item->uri()) === Request::instance()->uri()) ? 'active' : '';
 
-		echo '<li class="'.$active.'">'.Html::anchor($item->uri(), $item->title)."</li>\n";
+		echo '<li class="'.$active.'">'.Html::anchor($item->uri(), $item->content->menu_title)."</li>\n";
 	}
 }
 ?>
