@@ -49,7 +49,7 @@ $(function () {
 					return false;
 				});
 	
-				$.loadContent(site_uri('admin/site/update/'+$(NODE).attr('id').substr(5)));				
+				$.loadContent(site_uri('admin/'+$(NODE).attr('rel')+'/update/'+$(NODE).attr('id').substr(5)));				
 	        },
 	        
 	        onmove : function(NODE, REF_NODE, TYPE, TREE_OBJ, RB) {

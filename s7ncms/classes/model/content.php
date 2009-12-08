@@ -25,16 +25,30 @@ class Model_Content extends Sprig {
 			$page->insert_as_new_root(1);
 		}
 
-		$this->menu_title = $this->title;
-		$this->language = 'de-de';
-		$this->slug = URL::title($this->title);
-		$this->created_by = 1;
-		$this->updated_by = 1;
-		$this->hide_menu = FALSE;
-		$this->keywords = '';
-		$this->page = $page;
+		try
+		{
+			// don't do: $title = $this->title; ... it will load an existing entry from database!
+			$title = Arr::get($this->_changed, 'title', NULL);
 
-		return parent::create();
+			$this->menu_title = $title;
+			$this->language = 'de-de';
+			$this->slug = URL::title($title);
+			$this->created_by = 1;
+			$this->updated_by = 1;
+			$this->hide_menu = FALSE;
+			$this->keywords = '';
+			$this->page = $page;
+
+			parent::create();
+		}
+		catch (Exception $e)
+		{
+			$page->delete();
+
+			throw $e;
+		}
+
+		return $this;
 	}
 
 	public function update()
