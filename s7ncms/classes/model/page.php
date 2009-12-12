@@ -16,21 +16,9 @@ class Model_Page extends Sprig_MPTT {
 	protected function _init()
 	{
 		$this->_fields += array(
-			'id' => new Sprig_Field_Auto(array(
-				'rules' => array(
-					'regex' => array('/./')
-				)
-			)),
-			'lft' => new Sprig_Field_MPTT_Left(array(
-				'rules' => array(
-					'regex' => array('/./')
-				)
-			)),
-			'rgt' => new Sprig_Field_MPTT_Right(array(
-				'rules' => array(
-					'regex' => array('/./')
-				)
-			)),
+			'id' => new Sprig_Field_Auto,
+			'lft' => new Sprig_Field_MPTT_Left,
+			'rgt' => new Sprig_Field_MPTT_Right,
 			'lvl' => new Sprig_Field_MPTT_Level,
 			'language' => new Sprig_Field_MPTT_Scope,
 			'content' => new Sprig_Field_HasOne(array(
@@ -109,15 +97,15 @@ class Model_Page extends Sprig_MPTT {
 
 		if ($this->content->type === 'static')
 		{
-			$title = __('Page: :page', array(':page' => $this->content->title));
+			$title = $this->content->title;
 		}
 		elseif ($this->content->type === 'redirect')
 		{
-			$title = __('Redirect to: :target', array(':target' => $this->content->data));
+			$title = $this->content->data;
 		}
 		elseif ($this->content->type === 'module')
 		{
-			$title = __('Module: :module', array(':module' => $this->content->data));
+			$title = $this->content->data;
 		}
 
 		return $title;
@@ -134,7 +122,8 @@ class Model_Page extends Sprig_MPTT {
 		{
 			$has_children = ($page->lft+1 < $page->rgt);
 
-			if ($last_node_level == $page->lvl) {
+			if ($last_node_level == $page->lvl)
+			{
 				array_push($stack[count($stack)-1], array(
 					'data' => $page->title(),
 					'children' => array(),
@@ -161,7 +150,8 @@ class Model_Page extends Sprig_MPTT {
 			}
 			elseif ($last_node_level > $page->lvl)
 			{
-				for ($i=0; $i < ($last_node_level-$page->lvl); $i++) {
+				for ($i=0; $i < ($last_node_level-$page->lvl); $i++)
+				{
 					array_pop($stack);
 				}
 

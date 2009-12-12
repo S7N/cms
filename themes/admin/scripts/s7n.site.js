@@ -57,7 +57,7 @@ $(function () {
 	        },
 	        
 	        ondelete : function(NODE, TREE_OBJ, RB) {
-	        	$.post(site_uri('admin/page/delete/'+$(NODE).attr('id').substr(5)));
+	        	$.post(site_uri('admin/'+$(NODE).attr('rel')+'/delete/'+$(NODE).attr('id').substr(5)));
 	        	
 	        	$.emptyContent();
 	        }

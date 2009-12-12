@@ -7,73 +7,8 @@
  * See license.txt for full text and disclaimer
  */
 
-class Controller_Admin_Module extends S7N_Controller_Admin {
+class Controller_Admin_Module extends Controller_Admin_Page {
 
-	public function action_create()
-	{
-		$response = array('errors' => FALSE, 'callback' => 'create');
-		$page = Sprig::factory('page');
-		$content = Sprig::factory('content');
-
-		if ($_POST)
-		{
-			try
-			{
-				$content->type = 'module';
-				$content->values($_POST)->create();
-
-				$response = json_encode(array_merge($response, array(
-					'id' => 'item_'.$content->page->id,
-					'parent' => 'item_'.$content->page->root(1)->id,
-					'type' => $content->type,
-					'title' => $content->page->title()
-				)));
-			}
-			catch (Validate_Exception $e)
-			{
-				$response = json_encode(array('errors' => $e->array->errors('validate')));
-			}
-			catch (Kohana_Exception $e)
-			{
-				$response = json_encode(array($e->getMessage()));
-			}
-		}
-		else
-		{
-			$response = new View('module/create', array('page' => $page));
-		}
-
-		$this->content = $response;
-	}
-
-	public function action_update($id)
-	{
-		$response = array('errors' => FALSE, 'callback' => 'update');
-		$page = Sprig::factory('page', array('id' => $id))->load();
-		$content = $page->content->load();
-
-		if ($_POST)
-		{
-			try
-			{
-				$content->values($_POST)->update();
-
-				$response = json_encode(array_merge($response, array(
-					'id' => 'item_'.$content->page->id,
-					'title' => $content->page->title()
-				)));
-			}
-			catch (Validate_Exception $e)
-			{
-				$response = json_encode(array('errors' => $e->array->errors('validate')));
-			}
-			catch (Kohana_Exception $e)
-			{
-				$response = json_encode(array($e->getMessage()));
-			}
-		}
-
-		$this->content = $response;
-	}
+	protected $page_type = 'module';
 
 }
