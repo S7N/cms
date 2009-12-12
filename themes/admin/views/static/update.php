@@ -21,6 +21,13 @@
 					<?php echo $page->content->input('data', array('class' => 'text_area')) ?>
 					<span class="description">Write here a long text</span>
 				</div>
+				<div class="group">
+					<?php echo $page->content->label('menu_title', array('class' => 'label')) ?> <span class="error"></span>
+					<?php echo $page->content->input('menu_title', array('class' => 'text_field')) ?>
+				</div>
+				<div class="group">
+					<?php echo $page->content->input('hide_menu') ?>
+				</div>
 				<div class="group navform">
 					<input type="submit" class="button" value="Save" />
 				</div>

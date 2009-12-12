@@ -51,6 +51,16 @@ class Model_Content extends Sprig {
 		return $this;
 	}
 
+	public function values(array $values)
+	{
+		if ( ! isset($values['hide_menu']))
+		{
+			$values['hide_menu'] = 0;
+		}
+
+		return parent::values($values);
+	}
+
 	public function update()
 	{
 		$this->menu_title = $this->title;
@@ -87,7 +97,9 @@ class Model_Content extends Sprig {
 			)),
 			'created_by' => new Sprig_Field_Integer,
 			'updated_by' => new Sprig_Field_Integer,
-			'hide_menu' => new Sprig_Field_Boolean,
+			'hide_menu' => new Sprig_Field_Boolean(array(
+				'label' => __('Hide from menu')
+			)),
 			'keywords' => new Sprig_Field_Char(array(
 				'label' => __('Keywords'),
 				'empty' => TRUE,

@@ -2,13 +2,20 @@
 
 <ul>
 <?php
+
 if ($menu !== NULL AND count($menu) > 0)
 {
 	foreach ($menu as $item)
 	{
-		$active = (rldecode($item->uri()) === Request::instance()->uri()) ? 'active' : '';
+		if ($item->content->hide_menu)
+		{
+			continue;
+		}
 
-		echo '<li class="'.$active.'">'.Html::anchor($item->uri(), $item->content->menu_title)."</li>\n";
+		$active = (rldecode($item->uri()) === Request::instance()->uri()) ? 'active' : '';
+		$anchor = Html::anchor($item->uri(), $item->content->menu_title, array('class' => $active));
+
+		echo '<li class="'.$active.'">'.$anchor."</li>\n";
 	}
 }
 ?>
