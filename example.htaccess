@@ -7,7 +7,7 @@
 RewriteEngine On
 
 # Installation directory
-RewriteBase /kohana/
+#RewriteBase /kohana/
 
 # Protect hidden files from being viewed
 <Files .*>
@@ -22,5 +22,6 @@ RewriteRule ^(?:application|system|s7ncms|config)\b - [F,L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-# Rewrite all other URLs to index.php/URL
-RewriteRule .* index.php?s7n_uri=$0 [PT]
+# Rewrite all other URLs to index.php?s7n_uri=URL
+RewriteRule ^(.*)$ index.php?s7n_uri=$1 [QSA,PT,L]
+RewriteRule ^$ index.php?s7n_uri=$1 [QSA,PT,L]
