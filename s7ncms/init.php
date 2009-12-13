@@ -34,6 +34,7 @@ Kohana::modules(array_merge(Kohana::modules(), array (
 	'database'   => COREPATH.'modules/database',
 	'sprig'      => COREPATH.'modules/sprig',
 	'sprig-mptt' => COREPATH.'modules/sprig-mptt',
+	'htmlpurifier' => COREPATH.'modules/htmlpurifier',
 )));
 
 // enable database config

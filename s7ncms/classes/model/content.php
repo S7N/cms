@@ -73,12 +73,17 @@ class Model_Content extends Sprig {
 		$this->_fields += array(
 			'id' => new Sprig_Field_Auto,
 			'title' => new Sprig_Field_Char(array(
-				'label' => __('Title')
+				'label' => __('Title'),
+				'filters' => array('Security::purify' => NULL)
 			)),
 			'data' => new Sprig_Field_Text(array(
-				'label' => __('Content')
+				'label' => __('Content'),
+				'filters' => array('Security::purify' => NULL)
 			)),
-			'menu_title' => new Sprig_Field_Char,
+			'menu_title' => new Sprig_Field_Char(array(
+				'label' => __('Menu Title'),
+				'filters' => array('Security::purify' => NULL)
+			)),
 			'language' => new Sprig_Field_Char(array( // TODO: Sprig_Field_Language
 				'default' => 'de-de'
 			)),
