@@ -16,6 +16,7 @@ class Security extends Kohana_Security {
 		if (self::$htmlpurifier === NULL)
 		{
 			$config = HTMLPurifier_Config::createDefault();
+			$config->set('Cache.SerializerPath', CONFIGPATH.'cache');
 			$config->set('HTML.SafeObject', TRUE);
 			$config->set('HTML.SafeEmbed', TRUE);
 
