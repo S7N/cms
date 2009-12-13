@@ -1,3 +1,8 @@
+# Remove # in the following line if needed
+#AddType x-mapp-php5 .php
+#AddHandler x-mapp-php5 .php
+#AddHandler php5-fastcgi .php
+
 # Turn on URL rewriting
 RewriteEngine On
 
@@ -11,11 +16,11 @@ RewriteBase /kohana/
 </Files>
 
 # Protect application and system files from being viewed
-RewriteRule ^(?:application|system|s7ncms)\b - [F,L]
+RewriteRule ^(?:application|system|s7ncms|config)\b - [F,L]
 
 # Allow any files or directories that exist to be displayed directly
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
 # Rewrite all other URLs to index.php/URL
-RewriteRule .* index.php/$0 [PT]
+RewriteRule .* index.php?s7n_uri=$0 [PT]

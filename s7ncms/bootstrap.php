@@ -56,7 +56,7 @@ define('IN_PRODUCTION', FALSE);
  */
 Kohana::init(array(
 	'base_url' => dirname($_SERVER['SCRIPT_NAME']),
-	'index_file' => 'index.php',
+	'index_file' => isset($_GET['s7n_uri']) ? '' : 'index.php',
 	'cache_dir' => CONFIGPATH.'cache',
 	'caching' => FALSE,
 	'profile' => FALSE
@@ -81,7 +81,15 @@ Kohana::modules(array('s7ncms' => COREPATH));
  * Execute the main request. A source of the URI can be passed, eg: $_SERVER['PATH_INFO'].
  * If no source is specified, the URI will be automatically detected.
  */
-$request = Request::instance();
+
+if (isset($_GET['s7n_uri']))
+{
+	$request = Request::instance($_GET['s7n_uri']);
+}
+else
+{
+	$request = Request::instance();
+}
 
 try {
 	$request->execute();
