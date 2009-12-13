@@ -5,3 +5,4 @@ Icon?
 .project
 .settings
 config/database.php
+.htaccess
