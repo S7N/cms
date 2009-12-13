@@ -24,25 +24,6 @@ class Controller_Admin_Site extends S7N_Controller_Admin {
 		}
 	}
 
-	public function action_update($id)
-	{
-		$page = Sprig::factory('page', array('id' => $id))->load();
-
-		switch ($page->content->type) {
-			case 'static':
-				$this->content = new View('page/update', array('page' => $page));
-				break;
-
-			case 'module':
-				$this->content = new View('module/update', array('page' => $page));
-				break;
-
-			case 'redirect':
-				$this->content = new View('redirect/update', array('page' => $page));
-				break;
-		}
-	}
-
 	public function action_update_tree()
 	{
 		$tree = json_decode($_POST['tree'], TRUE);

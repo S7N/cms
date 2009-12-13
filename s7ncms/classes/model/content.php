@@ -63,8 +63,6 @@ class Model_Content extends Sprig {
 
 	public function update()
 	{
-		$this->menu_title = $this->title;
-
 		parent::update();
 	}
 

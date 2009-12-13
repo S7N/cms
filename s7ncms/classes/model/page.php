@@ -97,15 +97,15 @@ class Model_Page extends Sprig_MPTT {
 
 		if ($this->content->type === 'static')
 		{
-			$title = $this->content->title;
+			$title = $this->content->menu_title;
 		}
 		elseif ($this->content->type === 'redirect')
 		{
-			$title = $this->content->data;
+			$title = $this->content->menu_title;
 		}
 		elseif ($this->content->type === 'module')
 		{
-			$title = $this->content->data;
+			$title = $this->content->menu_title;
 		}
 
 		return $title;

@@ -35,10 +35,18 @@ if ($menu !== NULL AND count($menu) > 0)
 					$continue = count($item->descendants());
 				}
 
+				if ($last_item_has_children)
+				{
+					echo "</li>\n";
+				}
+
 				if ($last_item_is_child)
 				{
 					echo "</ul></li>\n";
 				}
+
+				$last_item_has_children = FALSE;
+				$last_item_is_child = FALSE;
 
 				continue;
 			}
