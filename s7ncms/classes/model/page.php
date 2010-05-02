@@ -122,6 +122,8 @@ class Model_Page extends Sprig_MPTT {
 
 		foreach ($pages as $page)
 		{
+			$page->content->load();
+
 			$has_children = ($page->lft+1 < $page->rgt);
 
 			if ($last_node_level == $page->lvl)
