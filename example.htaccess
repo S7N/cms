@@ -16,7 +16,8 @@ RewriteEngine On
 </Files>
 
 # Protect application and system files from being viewed
-RewriteRule ^(?:application|system|s7ncms|config)\b - [F,L]
+RewriteRule ^(?:application|config|s7ncms)\b.* index.php?s7n_uri=$0 [L]
+
 
 # Allow any files or directories that exist to be displayed directly
 RewriteCond %{REQUEST_FILENAME} !-f
