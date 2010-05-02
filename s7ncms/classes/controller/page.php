@@ -15,23 +15,31 @@ class Controller_Page extends S7N_Controller_Template {
 
 		if ($page->loaded())
 		{
-			switch ($page->content->type)
+			if ($page->content->loaded())
 			{
-				case 'redirect':
-					Request::instance()->redirect($page->content->data);
-					break;
+				switch ($page->content->type)
+				{
+					case 'redirect':
+						Request::instance()->redirect($page->content->data);
+						break;
 
-				case 'module':
-					$this->content = Request::factory('module/'.$page->content->data .'/'. implode('/', $page->arguments))->execute()->response;
-					break;
+					case 'module':
+						$this->content = Request::factory('module/'.$page->content->data .'/'. implode('/', $page->arguments))->execute()->response;
+						break;
 
-				case 'static':
-					$this->show_page($page);
-					break;
+					case 'static':
+						$this->show_page($page);
+						break;
 
-				default:
-					// unknown content type
-					throw new S7N_Exception_404;
+					default:
+						// unknown content type
+						throw new S7N_Exception_404;
+				}
+			}
+			else
+			{
+				// where is our content? inconsistent database
+				throw new S7N_Exception_500;
 			}
 		}
 		else

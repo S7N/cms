@@ -44,6 +44,8 @@ class Model_Page extends Sprig_MPTT {
 			{
 				foreach ($children as $child)
 				{
+					$child->content->load();
+
 					if ($child->content->slug === $segments[$i])
 					{
 						$current_page = $child;

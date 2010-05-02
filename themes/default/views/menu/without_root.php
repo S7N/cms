@@ -28,6 +28,8 @@ if ($menu !== NULL AND count($menu) > 0)
 				continue;
 			}
 
+			$item->content->load();
+
 			if ($item->content->hide_menu)
 			{
 				if ($item->has_children())

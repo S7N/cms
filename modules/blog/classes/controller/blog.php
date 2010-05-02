@@ -18,13 +18,13 @@ class Controller_Blog extends S7N_Controller_Template {
 	public function action_tag($tag)
 	{
 		$this->title .= ' - Weblog - Tag: '.$tag;
-		$this->content = '<h2>Blog</h2>this is my blog';
+		$this->content = '<h2>Blog</h2>this is my blog with tag '.$tag;
 	}
 
 	public function action_paginate($page)
 	{
 		$this->title .= ' - Weblog - Page: '.$page;
-		$this->content = '<h2>Blog</h2>this is my blog';
+		$this->content = '<h2>Blog</h2>this is my blog with page number '.$page;
 	}
 
 }

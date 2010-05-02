@@ -16,7 +16,7 @@ date_default_timezone_set('Europe/Berlin');
 * @see http://docs.kohanaphp.com/about.configuration
 * @see http://php.net/setlocale
 */
-setlocale(LC_ALL, 'de_DE.utf-8');
+setlocale(LC_ALL, array('de_DE.UTF-8','de_DE@euro','de_DE','german'));
 
 /**
  * Enable the Kohana auto-loader.
@@ -33,6 +33,8 @@ spl_autoload_register(array('Kohana', 'auto_load'));
  * @see  http://php.net/manual/var.configuration.php#unserialize-callback-func
  */
 ini_set('unserialize_callback_func', 'spl_autoload_call');
+
+I18n::lang('de_DE');
 
 /**
 * Set the production status
