@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
  * S7Ncms - Open Source Content Management
- * Copyright (c) 2007-2009, Eduard Baun <eduard at baun.de>
+ * Copyright (c) 2007-2010, Eduard Baun <eduard at baun.de>
  * All rights reserved.
  *
  * See license.txt for full text and disclaimer
@@ -15,32 +15,37 @@ class Controller_Page extends S7N_Controller_Template {
 
 		if ($page->loaded())
 		{
-			if ($page->content->loaded())
+			//$page->content->load();
+
+			if ( ! $page->content->loaded())
 			{
-				switch ($page->content->type)
-				{
-					case 'redirect':
-						Request::instance()->redirect($page->content->data);
-						break;
-
-					case 'module':
-						$this->content = Request::factory('module/'.$page->content->data .'/'. implode('/', $page->arguments))->execute()->response;
-						break;
-
-					case 'static':
-						$this->show_page($page);
-						break;
-
-					default:
-						// unknown content type
-						throw new S7N_Exception_404;
-				}
+				$page->content->load();
 			}
+
+			switch ($page->content->type)
+			{
+				case 'redirect':
+					Request::instance()->redirect($page->content->data);
+					break;
+
+				case 'module':
+					$this->content = Request::factory('module/'.$page->content->data .'/'. implode('/', $page->arguments))->execute()->response;
+					break;
+
+				case 'static':
+					$this->show_page($page);
+					break;
+
+				default:
+					// unknown content type
+					throw new S7N_Exception_500;
+			}
+			/*}
 			else
 			{
 				// where is our content? inconsistent database
 				throw new S7N_Exception_500;
-			}
+			}*/
 		}
 		else
 		{

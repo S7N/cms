@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
  * S7Ncms - Open Source Content Management
- * Copyright (c) 2007-2009, Eduard Baun <eduard at baun.de>
+ * Copyright (c) 2007-2010, Eduard Baun <eduard at baun.de>
  * All rights reserved.
  *
  * See license.txt for full text and disclaimer
@@ -12,6 +12,8 @@ class Model_Page extends Sprig_MPTT {
 	protected $_table = 'pages';
 	protected $_sorting = array('lft' => 'ASC');
 	public $arguments = array();
+
+	protected $_uri = NULL;
 
 	protected function _init()
 	{
@@ -75,27 +77,38 @@ class Model_Page extends Sprig_MPTT {
 
 	public function uri()
 	{
-		$uri = array();
-		foreach ($this->parents() as $parent)
+		if ($this->_uri === NULL)
 		{
-			if ($parent->lvl > 0)
+			$uri = array();
+
+			foreach ($this->parents() as $parent)
 			{
-				$uri[] = urlencode($parent->content->slug);
+				//$parent->load();
+
+				if ( ! $parent->is_root())
+				{
+					$parent->content->load();
+					$uri[] = urlencode($parent->content->slug);
+				}
 			}
+
+			if ( ! $this->is_root())
+			{
+				//$this->content->load();
+				$uri[] = urlencode($this->content->slug);
+			}
+
+			$this->_uri = empty($uri) ? '/' : implode('/', $uri);
 		}
 
-		if ($this->lvl > 0)
-		{
-			$uri[] = urlencode($this->content->slug);
-		}
-
-		return empty($uri) ? '/' : implode('/', $uri);
-
+		return $this->_uri;
 	}
 
 	public function title()
 	{
 		$title = 'Untitled ID: '.$this->id;
+
+		//$this->content->load();
 
 		if ($this->content->type === 'static')
 		{

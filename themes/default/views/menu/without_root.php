@@ -23,13 +23,15 @@ if ($menu !== NULL AND count($menu) > 0)
 				continue;
 			}
 
-			if ($item->lvl === 0)
+			// continue if this is a root node
+			if ($item->is_root())
 			{
 				continue;
 			}
 
 			$item->content->load();
 
+			// dont show hidden items
 			if ($item->content->hide_menu)
 			{
 				if ($item->has_children())
